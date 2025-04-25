@@ -1,0 +1,699 @@
+@import '../../styles/variables.scss';
+@import '../../styles/mixins.scss';
+
+.signup-form-paper {
+    padding: 2rem;
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    width: 100%;
+
+    @media (max-width: 600px) {
+        padding: 1.5rem;
+        margin-top: 1rem;
+    }
+}
+
+.signup-title {
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    color: $primary-color;
+}
+
+.signup-form {
+    width: 100%;
+}
+
+.signup-alert {
+    margin-bottom: 1rem;
+}
+
+.signup-button {
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.login-link-container {
+    margin-top: 1rem;
+}
+
+.login-link {
+    color: $primary-color;
+    text-decoration: none;
+
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
+.role-select {
+    margin-top: 1rem;
+}
+
+.hero-dashboard {
+    @include flex-between;
+    min-height: 85vh;
+    padding: $spacing-xxl 5%;
+    background-color: $background-color;
+    overflow: hidden;
+    position: relative;
+
+    @include respond-to(xxl) {
+        padding: $spacing-xl 5%;
+    }
+
+    @include respond-to(lg) {
+        padding: $spacing-lg 4%;
+    }
+
+    @include respond-to(md-lg) {
+        padding: $spacing-lg 4%;
+    }
+
+    @include respond-to(md) {
+        flex-direction: column;
+        text-align: center;
+        padding: $spacing-lg 4%;
+        gap: $spacing-lg;
+        min-height: 80vh;
+    }
+
+    @include respond-to(sm-md) {
+        flex-direction: column;
+        text-align: center;
+        padding: $spacing-md 3%;
+        gap: $spacing-md;
+        min-height: 75vh;
+    }
+
+    @include respond-to(sm) {
+        flex-direction: column;
+        text-align: center;
+        padding: $spacing-md 3%;
+        gap: $spacing-md;
+        min-height: auto;
+    }
+
+    @include respond-to(xs) {
+        padding: $spacing-sm 2%;
+        gap: $spacing-sm;
+    }
+
+    @include respond-to(xxs) {
+        padding: $spacing-sm 2%;
+    }
+}
+
+.hero-content {
+    flex: 1;
+    max-width: 600px;
+    z-index: 2;
+
+    @include respond-to(xxl) {
+        max-width: 550px;
+    }
+
+    @include respond-to(xl) {
+        max-width: 500px;
+    }
+
+    @include respond-to(lg) {
+        max-width: 450px;
+    }
+
+    @include respond-to(md) {
+        max-width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+.hero-title {
+    @include heading-1;
+    color: $primary-color;
+    margin-bottom: $spacing-lg;
+    animation: fadeInUp 0.8s ease-out;
+
+    @include respond-to(xl) {
+        font-size: 1.8rem;
+    }
+
+    @include respond-to(lg) {
+        margin-bottom: $spacing-md;
+        font-size: 1.6rem;
+    }
+
+    @include respond-to(md-lg) {
+        font-size: 1.5rem;
+    }
+
+    @include respond-to(md) {
+        font-size: 1.5rem;
+        margin-bottom: $spacing-md;
+    }
+
+    @include respond-to(sm) {
+        font-size: 1.3rem;
+        margin-bottom: $spacing-sm;
+    }
+
+    @include respond-to(xs) {
+        font-size: 1.2rem;
+    }
+
+    @include respond-to(xxs) {
+        font-size: 1.1rem;
+    }
+}
+
+.hero-subtitle {
+    @include heading-3;
+    color: $text-light;
+    margin-bottom: $spacing-xl;
+    animation: fadeInUp 0.8s ease-out 0.2s;
+    animation-fill-mode: both;
+
+    @include respond-to(xl) {
+        font-size: 1.1rem;
+    }
+
+    @include respond-to(lg) {
+        margin-bottom: $spacing-lg;
+        font-size: 1rem;
+    }
+
+    @include respond-to(md) {
+        font-size: 1rem;
+        margin-bottom: $spacing-md;
+    }
+
+    @include respond-to(sm-md) {
+        font-size: 0.95rem;
+    }
+
+    @include respond-to(sm) {
+        font-size: 0.9rem;
+        margin-bottom: $spacing-md;
+    }
+
+    @include respond-to(xs) {
+        font-size: 0.85rem;
+    }
+}
+
+.hero-cta-container {
+    display: flex;
+    gap: $spacing-md;
+    animation: fadeInUp 0.8s ease-out 0.4s;
+    animation-fill-mode: both;
+
+    @include respond-to(lg) {
+        gap: $spacing-sm;
+    }
+
+    @include respond-to(md) {
+        justify-content: center;
+        gap: $spacing-sm;
+    }
+
+    @include respond-to(sm-md) {
+        gap: $spacing-sm;
+    }
+
+    @include respond-to(sm) {
+        flex-direction: column;
+        width: 100%;
+        max-width: 300px;
+        gap: $spacing-xs;
+    }
+}
+
+.hero-cta-button {
+    min-width: 180px;
+
+    @include respond-to(xl) {
+        min-width: 160px;
+    }
+
+    @include respond-to(lg) {
+        min-width: 140px;
+    }
+
+    @include respond-to(md) {
+        min-width: 130px;
+        font-size: 0.9rem;
+        padding: 8px 16px;
+    }
+
+    @include respond-to(sm) {
+        width: 100%;
+        min-width: unset;
+        font-size: 0.85rem;
+        padding: 8px 12px;
+    }
+
+    @include respond-to(xs) {
+        font-size: 0.8rem;
+        padding: 6px 10px;
+    }
+}
+
+.hero-visual {
+    flex: 1;
+    position: relative;
+    height: 500px;
+    z-index: 1;
+
+    @include respond-to(xxl) {
+        height: 450px;
+    }
+
+    @include respond-to(xl) {
+        height: 430px;
+    }
+
+    @include respond-to(lg-xl) {
+        height: 400px;
+    }
+
+    @include respond-to(lg) {
+        height: 380px;
+    }
+
+    @include respond-to(md-lg) {
+        height: 350px;
+    }
+
+    @include respond-to(md) {
+        width: 100%;
+        height: 400px;
+    }
+
+    @include respond-to(sm-md) {
+        height: 350px;
+    }
+
+    @include respond-to(sm) {
+        height: 300px;
+    }
+
+    @include respond-to(xs) {
+        height: 280px;
+    }
+
+    @include respond-to(xxs) {
+        height: 250px;
+    }
+}
+
+.hero-visual-image {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    animation: fadeIn 1s ease-out 0.5s;
+    animation-fill-mode: both;
+}
+
+.hero-visual-chips {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+}
+
+.floating-chip {
+    position: absolute;
+    font-weight: 600;
+    padding: 8px 16px;
+    height: auto;
+    font-size: 14px;
+    box-shadow: $shadow-md;
+    border-radius: 50px !important;
+    color: white !important;
+    letter-spacing: 0.5px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+    @include respond-to(lg) {
+        font-size: 13px;
+        padding: 7px 14px;
+    }
+
+    @include respond-to(md) {
+        font-size: 12px;
+        padding: 6px 12px;
+    }
+
+    @include respond-to(sm) {
+        font-size: 11px;
+        padding: 5px 10px;
+    }
+
+    @include respond-to(xs) {
+        font-size: 10px;
+        padding: 4px 8px;
+    }
+
+    &:hover {
+        transform: translateY(-5px) scale(1.05);
+        box-shadow: $shadow-lg;
+        cursor: pointer;
+    }
+
+    &-1 {
+        top: 15%;
+        right: 10%;
+        background: linear-gradient(45deg, #4CAF50, #8BC34A) !important;
+        animation: float 4s ease-in-out infinite;
+
+        @include respond-to(md) {
+            top: 10%;
+            right: 15%;
+        }
+
+        @include respond-to(sm) {
+            top: 5%;
+            right: 10%;
+        }
+    }
+
+    &-2 {
+        top: 35%;
+        right: 25%;
+        background: linear-gradient(45deg, #2196F3, #03A9F4) !important;
+        animation: float 7s ease-in-out 0.5s infinite;
+
+        @include respond-to(sm-md) {
+            top: 25%;
+            right: 30%;
+        }
+
+        @include respond-to(xs) {
+            top: 20%;
+            right: 35%;
+        }
+    }
+
+    &-3 {
+        top: 55%;
+        right: 5%;
+        background: linear-gradient(45deg, #9C27B0, #673AB7) !important;
+        animation: float 5s ease-in-out 1s infinite;
+
+        @include respond-to(md) {
+            top: 50%;
+            right: 10%;
+        }
+
+        @include respond-to(xs) {
+            top: 45%;
+            right: 5%;
+        }
+    }
+
+    &-4 {
+        top: 25%;
+        left: 15%;
+        background: linear-gradient(45deg, #FF5722, #FF9800) !important;
+        animation: float 6s ease-in-out 1.5s infinite;
+
+        @include respond-to(md) {
+            top: 20%;
+            left: 10%;
+        }
+
+        @include respond-to(xs) {
+            top: 15%;
+            left: 5%;
+        }
+    }
+
+    &-5 {
+        top: 60%;
+        left: 25%;
+        background: linear-gradient(45deg, #E91E63, #F44336) !important;
+        animation: float 8s ease-in-out 2s infinite;
+
+        @include respond-to(sm-md) {
+            top: 55%;
+            left: 20%;
+        }
+
+        @include respond-to(xs) {
+            top: 50%;
+            left: 15%;
+        }
+    }
+
+    &-6 {
+        top: 40%;
+        left: 5%;
+        background: linear-gradient(45deg, #795548, #9E9E9E) !important;
+        animation: float 9s ease-in-out 1s infinite;
+
+        @include respond-to(md) {
+            top: 35%;
+            left: 8%;
+        }
+
+        @include respond-to(xs) {
+            top: 30%;
+            left: 10%;
+        }
+    }
+
+    &-7 {
+        top: 10%;
+        left: 30%;
+        background: linear-gradient(45deg, #009688, #4DB6AC) !important;
+        animation: float 7s ease-in-out 0.7s infinite;
+
+        @include respond-to(sm-md) {
+            top: 5%;
+            left: 25%;
+        }
+
+        @include respond-to(xs) {
+            top: 8%;
+            left: 22%;
+        }
+    }
+
+    &-8 {
+        top: 75%;
+        right: 15%;
+        background: linear-gradient(45deg, #3F51B5, #7986CB) !important;
+        animation: float 6s ease-in-out 1.2s infinite;
+
+        @include respond-to(md) {
+            top: 70%;
+            right: 20%;
+        }
+
+        @include respond-to(xs) {
+            top: 65%;
+            right: 15%;
+        }
+    }
+
+    &-9 {
+        top: 80%;
+        left: 10%;
+        background: linear-gradient(45deg, #FFC107, #FFEB3B) !important;
+        animation: float 5s ease-in-out 0.3s infinite;
+
+        @include respond-to(sm-md) {
+            top: 75%;
+            left: 5%;
+        }
+
+        @include respond-to(xs) {
+            top: 70%;
+            left: 8%;
+        }
+    }
+}
+
+.parallax-image {
+    object-fit: contain;
+    animation: float 6s ease-in-out infinite;
+}
+
+.floating-elements {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.floating-item {
+    position: absolute;
+    filter: drop-shadow(0px 10px 15px rgba(0, 0, 0, 0.1));
+
+    &-1 {
+        top: 10%;
+        right: 15%;
+        animation: float 4s ease-in-out infinite;
+    }
+
+    &-2 {
+        bottom: 20%;
+        left: 10%;
+        animation: float 5s ease-in-out 1s infinite;
+    }
+
+    &-3 {
+        top: 40%;
+        right: 5%;
+        animation: float 7s ease-in-out 0.5s infinite;
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-15px);
+    }
+
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+// Header styles
+.hero-header {
+    @include flex-between;
+    padding: $spacing-md 5%;
+    background-color: rgba($paper-color, 0.98);
+    box-shadow: $shadow-sm;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+
+    @include respond-to(md) {
+        padding: $spacing-md 4%;
+    }
+
+    @include respond-to(sm-md) {
+        padding: $spacing-sm 3%;
+    }
+
+    @include respond-to(sm) {
+        padding: $spacing-sm 3%;
+    }
+
+    @include respond-to(xs) {
+        padding: $spacing-xs 2%;
+    }
+}
+
+.hero-logo {
+    display: flex;
+    align-items: center;
+
+    img {
+        @include respond-to(sm) {
+            width: 120px;
+            height: auto;
+        }
+
+        @include respond-to(xs) {
+            width: 100px;
+        }
+    }
+}
+
+.hero-nav {
+    display: flex;
+    gap: $spacing-md;
+    align-items: center;
+
+    @include respond-to(md) {
+        gap: $spacing-sm;
+    }
+
+    @include respond-to(sm-md) {
+        gap: $spacing-xs;
+    }
+
+    @include respond-to(xs) {
+        gap: 6px;
+    }
+}
+
+.mobile-menu-button {
+    color: $primary-color !important;
+
+    &:hover {
+        background-color: rgba($primary-color, 0.05) !important;
+    }
+}
+
+.MuiMenu-paper {
+    border-radius: $border-radius !important;
+    margin-top: 8px !important;
+    box-shadow: $shadow-md !important;
+
+    .MuiMenuItem-root {
+        font-family: $font-family !important;
+        font-size: $font-size-sm !important;
+        color: $text-color !important;
+        min-height: 40px !important;
+
+        &:hover {
+            background-color: rgba($primary-color, 0.05) !important;
+        }
+    }
+}
+
+.nav-button {
+    @include respond-to(md) {
+        font-size: $font-size-sm;
+    }
+
+    @include respond-to(sm-md) {
+        padding: $spacing-xs $spacing-sm;
+        font-size: $font-size-sm;
+    }
+
+    @include respond-to(sm) {
+        padding: $spacing-xs $spacing-sm;
+        font-size: $font-size-xs;
+    }
+
+    @include respond-to(xs) {
+        padding: 4px 8px;
+        font-size: $font-size-xs;
+        min-width: auto !important;
+    }
+}
