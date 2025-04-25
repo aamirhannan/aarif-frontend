@@ -53,7 +53,7 @@ export default function SignupPage() {
     });
 
     const roleMap = {
-        'CAUSE_POSTER': ROLES.CAUSE_POSTER,
+        'CAUSE_CREATOR': ROLES.CAUSE_CREATOR,
         'SPONSOR': ROLES.SPONSOR,
         'PUBLIC': ROLES.PUBLIC
     };

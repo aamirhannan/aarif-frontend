@@ -4,6 +4,7 @@ import "./hero-dashboard.scss";
 import CustomButton from "../Button";
 import { Chip, IconButton, Menu, MenuItem } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
+import { useRouter } from "next/navigation";
 
 const categoryMap = {
     ENVIRONMENT: "Environment",
@@ -20,7 +21,7 @@ const categoryMap = {
 const HeroDashboard = () => {
     const [anchorEl, setAnchorEl] = useState(null);
     const [isMobile, setIsMobile] = useState(false);
-
+    const router = useRouter();
     useEffect(() => {
         const handleResize = () => {
             setIsMobile(window.innerWidth < 600);
@@ -37,6 +38,14 @@ const HeroDashboard = () => {
 
     const handleMenuClose = () => {
         setAnchorEl(null);
+    };
+
+    const handleLogin = () => {
+        router.push("/login");
+    };
+
+    const handleSeeAllCauses = () => {
+        router.push("/all-cause");
     };
 
     return (
@@ -81,14 +90,14 @@ const HeroDashboard = () => {
                             variant="outline"
                             size="medium"
                             btnText="See All Causes"
-                            btnClick={() => { }}
+                            btnClick={handleSeeAllCauses}
                             className="nav-button"
                         />
                         <CustomButton
                             variant="primary"
                             size="medium"
                             btnText="Login as Admin"
-                            btnClick={() => { }}
+                            btnClick={handleLogin}
                             className="nav-button"
                         />
                     </div>
@@ -105,14 +114,14 @@ const HeroDashboard = () => {
                             variant="primary"
                             size="large"
                             btnText="Post a Cause"
-                            btnClick={() => { }}
+                            btnClick={handleLogin}
                             className="hero-cta-button"
                         />
                         <CustomButton
                             variant="secondary"
                             size="large"
                             btnText="Sponsor a Cause"
-                            btnClick={() => { }}
+                            btnClick={handleLogin}
                             className="hero-cta-button"
                         />
                     </div>

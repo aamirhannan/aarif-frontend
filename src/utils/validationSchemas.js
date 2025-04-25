@@ -2,7 +2,8 @@ import Joi from 'joi';
 
 // Define roles constants
 export const ROLES = {
-    CAUSE_POSTER: 'CAUSE_POSTER',
+    ADMIN: 'ADMIN',
+    CAUSE_CREATOR: 'CAUSE_CREATOR',
     SPONSOR: 'SPONSOR',
     PUBLIC: 'PUBLIC'
 };

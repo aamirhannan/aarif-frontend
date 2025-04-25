@@ -24,6 +24,7 @@ import CustomButton from '@/components/Button';
 import './login.scss';
 import PageLoader from '@/components/PageLoader';
 import ERROR_MESSAGE from '@/utils/errorMessages';
+import { ROLES } from '@/utils/validationSchemas';
 export default function LoginPage() {
     const router = useRouter();
     const [loading, setLoading] = useState(true);
@@ -32,7 +33,7 @@ export default function LoginPage() {
     const { handleOpenSnakeBar, handleCloseSnakeBar } = useContext(SnakeBarContext);
     const [apiInProgress, setApiInProgress] = useState(false);
     const [formData, setFormData] = useState({
-        email: 'testuser8@example.com',
+        email: 'admin@gmail.com',
         password: 'Password123'
     });
     const [formErrors, setFormErrors] = useState({
@@ -73,7 +74,7 @@ export default function LoginPage() {
             if (response.data.status === 200) {
                 const userData = response.data.data;
                 setUserData(userData);
-                router.push('/dashboard');
+                handleLoginRedirect(userData);
             }
             handleOpenSnakeBar('Login successful', 'success');
 
@@ -95,9 +96,28 @@ export default function LoginPage() {
 
     useEffect(() => {
         if (!loading && (userData && Object.keys(userData).length > 0)) {
-            router.push("/dashboard");
+            handleLoginRedirect(userData);
         }
     }, [userData, loading, router]);
+
+
+    const handleLoginRedirect = (userData) => {
+        const userRole = userData.role;
+        switch (userRole) {
+            case ROLES.ADMIN:
+                router.push("/admin/dashboard");
+                break;
+            case ROLES.CAUSE_CREATOR:
+                router.push("/cause-creator/dashboard");
+                break;
+            case ROLES.SPONSOR:
+                router.push("/sponsor/dashboard");
+                break;
+            default:
+                router.push("/all-cause");
+                break;
+        }
+    }
 
 
     if (loading) {
