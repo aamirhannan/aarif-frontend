@@ -24,8 +24,8 @@ export default function CauseCreatorLayout({ children }) {
     }
 
     return (
-        <div>
+        <>
             {children}
-        </div>
+        </>
     );
 }

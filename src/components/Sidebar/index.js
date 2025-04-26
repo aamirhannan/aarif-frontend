@@ -38,11 +38,11 @@ const Sidebar = ({ sideBarItems }) => {
         <div className="sidebar-container">
             <div className="sidebar-logo">
                 <Image
-                    src={'/images/logo.png'}
+                    src={'/images/toto-logo.png'}
                     alt="logo"
-                    width={100}
+                    width={180}
                     height={100}
-                    style={{ aspectRatio: '1/1' }}
+                    style={{ aspectRatio: '16/9' }}
                 />
             </div>
 

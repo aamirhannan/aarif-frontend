@@ -25,51 +25,51 @@ export default function ProtectedLayout({ children }) {
             {
                 name: 'Dashboard',
                 icon: <LayoutDashboard style={iconStyle} />,
-                path: '/dashboard'
+                path: '/admin/dashboard'
             },
             {
                 name: 'Send Mails',
                 icon: <Mail style={iconStyle} />,
-                path: '/send-mails'
+                path: '/admin/send-mails'
             },
             {
                 name: 'Upload Mails',
                 icon: <Upload style={iconStyle} />,
-                path: '/upload-mails'
+                path: '/admin/upload-mails'
             }
         ],
         CAUSE_CREATOR: [
             {
                 name: 'Dashboard',
                 icon: <LayoutDashboard style={iconStyle} />,
-                path: '/dashboard'
+                path: '/cause-creator/dashboard'
             },
             {
-                name: 'Saved Mails',
+                name: 'Create Cause',
                 icon: <Save style={iconStyle} />,
-                path: '/saved-mails'
+                path: '/cause-creator/create-cause'
             },
             {
-                name: 'Applied Mails',
+                name: 'Cause List',
                 icon: <Send style={iconStyle} />,
-                path: '/applied-mails'
+                path: '/cause-creator/cause-list'
             }
         ],
         SPONSOR: [
             {
                 name: 'Dashboard',
                 icon: <LayoutDashboard style={iconStyle} />,
-                path: '/dashboard'
+                path: '/sponsor/dashboard'
             },
             {
-                name: 'Send Mails',
+                name: 'Cause List',
                 icon: <Mail style={iconStyle} />,
-                path: '/send-mails'
+                path: '/sponsor/cause-list'
             },
             {
-                name: 'Saved Mails',
-                icon: <Save style={iconStyle} />,
-                path: '/saved-mails'
+                name: 'Cause List',
+                icon: <Send style={iconStyle} />,
+                path: '/sponsor/cause-list'
             }
         ]
     }
@@ -79,8 +79,8 @@ export default function ProtectedLayout({ children }) {
         if (!userData) {
             router.push("/login");
         }
-        setSideBarItems(SIDEBAR_ITEMS[userData.role]);
-        setCurrentRole(userData.role);
+        setSideBarItems(SIDEBAR_ITEMS[userData?.role]);
+        setCurrentRole(userData?.role);
         setTimeout(() => {
             setIsLoading(false);
         }, 1000);

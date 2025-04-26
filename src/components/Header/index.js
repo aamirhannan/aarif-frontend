@@ -32,7 +32,7 @@ const Header = ({ currentRole }) => {
         <div className="header-container">
             <div className="header-left">
                 <div className="header-left-logo">
-                    <h1>{currentRole ? `Login as ${currentRole} ` : ''}</h1>
+                    <h1>{currentRole ? `${currentRole} Previledges` : ''}</h1>
                 </div>
             </div>
 
