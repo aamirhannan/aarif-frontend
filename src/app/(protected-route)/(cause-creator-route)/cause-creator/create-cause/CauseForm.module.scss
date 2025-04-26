@@ -1,0 +1,38 @@
+// Main container for the form
+.formContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 120px);
+    padding: 2rem 1rem;
+}
+
+// Paper component styling
+.formPaper {
+    width: 100%;
+    max-width: 650px;
+    padding: 2rem;
+    border-radius: 8px !important;
+    box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.1) !important;
+}
+
+// Form title styling
+.formTitle {
+    color: #1976d2;
+    margin-bottom: 2rem !important;
+    text-align: center;
+    font-weight: 600 !important;
+}
+
+// Submit button styling
+.submitButton {
+    margin-top: 1.5rem !important;
+    height: 48px;
+    font-weight: 600 !important;
+    background-color: #1976d2 !important;
+    letter-spacing: 1px;
+
+    &:hover {
+        background-color: #1565c0 !important;
+    }
+}
