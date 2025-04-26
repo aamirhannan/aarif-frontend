@@ -4,10 +4,12 @@ import { useRouter } from "next/navigation";
 import AuthContext from "@/context/authContext";
 import PageLoader from "@/components/PageLoader";
 import { ROLES } from "@/utils/validationSchemas";
+
 export default function CauseCreatorLayout({ children }) {
     const router = useRouter();
     const { userData } = useContext(AuthContext);
     const [isLoading, setIsLoading] = useState(true);
+
 
     useEffect(() => {
         if (userData?.role !== ROLES.CAUSE_CREATOR) {

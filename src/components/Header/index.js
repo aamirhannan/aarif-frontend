@@ -12,7 +12,7 @@ const urlMapping = {
     '/saved-mails': 'Saved Mails',
     '/upload-mails': 'Upload Mails',
 }
-const Header = () => {
+const Header = ({ currentRole }) => {
     const router = useRouter();
     const { setUserData } = useContext(AuthContext);
     const [pageTitle, setPageTitle] = useState(null);
@@ -32,7 +32,7 @@ const Header = () => {
         <div className="header-container">
             <div className="header-left">
                 <div className="header-left-logo">
-                    <h1>{pageTitle ? pageTitle : 'Linkedin Mailer'}</h1>
+                    <h1>{currentRole ? `Login as ${currentRole} ` : ''}</h1>
                 </div>
             </div>
 
