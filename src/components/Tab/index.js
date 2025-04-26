@@ -39,7 +39,8 @@ export default function BasicTabs({
     tabNames = [],
     causeData = [],
     setOpenSideDrawer = () => { },
-    handleShareCause = () => { }
+    handleShareCause = () => { },
+    handleOpenSideDrawer = () => { }
 }) {
     const [value, setValue] = useState(tabNames[0]?.value || "ALL");
 
@@ -77,9 +78,11 @@ export default function BasicTabs({
                         gap: '20px'
                     }}>
                         {filterCauseData(tabName.value).map((cause, idx) => (
-                            <CustomCard key={cause.causeID || idx} causeData={cause}
+                            <CustomCard key={cause.causeID || idx}
+                                causeData={cause}
                                 setOpenSideDrawer={setOpenSideDrawer}
                                 handleShareCause={handleShareCause}
+                                handleOpenSideDrawer={handleOpenSideDrawer}
                             />
                         ))}
                     </div>

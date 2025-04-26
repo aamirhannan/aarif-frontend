@@ -1,8 +1,15 @@
+import './ShareModal.module.scss';
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
+import { useContext } from 'react';
+import SnakeBarContext from '@/context/snakeBarContext';
+import CloseIcon from '@mui/icons-material/Close';
+import ContentCopyIcon from '@mui/icons-material/ContentCopy';
+import DownloadIcon from '@mui/icons-material/Download';
+import { IconButton, CircularProgress, Divider, TextField, InputAdornment } from '@mui/material';
 
 const style = {
     position: 'absolute',
@@ -11,36 +18,136 @@ const style = {
     transform: 'translate(-50%, -50%)',
     width: 400,
     bgcolor: 'background.paper',
-    border: '2px solid #000',
+    borderRadius: '8px',
     boxShadow: 24,
-    p: 4,
+    p: 3,
 };
 
-export default function ShareModal({ open, setOpen, modalLoading }) {
+export default function ShareModal({ open, setOpen, isLoading, shareableLink }) {
+    const { handleOpenSnakeBar } = useContext(SnakeBarContext);
+    // const [isLoading, setIsLoading] = React.useState(modalLoading);
 
-    const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
-    const shareableLink = {
-        "shareLink": "http://localhost:5000/all-cause?causeId=2b72aff5-5873-423f-89cd-bfcb3dc36e45",
-        "qrCode": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAC0CAYAAAA9zQYyAAAAAklEQVR4AewaftIAAAeJSURBVO3BQW4ERxLAQLKg/3+Z62OeGmjMSGsXMsL+wVqXOKx1kcNaFzmsdZHDWhc5rHWRw1oXOax1kcNaFzmsdZHDWhc5rHWRw1oXOax1kcNaFzmsdZEfPqTylyomlaliUpkqnqhMFZPKVPFE5RMVk8pUMam8UfFE5S9VfOKw1kUOa13ksNZFfviyim9SeVIxqbyhMlX8pYonKlPFGxXfVPFNKt90WOsih7UucljrIj/8MpU3Kr6pYlKZKiaVqWKqeKLypGJS+aaKv6TyRsVvOqx1kcNaFzmsdZEf/uNUnqhMFU8q3lCZKiaVJxVPVCaVqWJSmSomlaniJoe1LnJY6yKHtS7yw2UqJpVJZap4Q+WJylTxiYpJ5UnFGypTxX/ZYa2LHNa6yGGti/zwyyr+kspUMak8UXmjYlJ5ojJVTCpTxVQxqTypmComlU9U/Jsc1rrIYa2LHNa6yA9fpvL/VDGpTBWTylQxqUwVk8pUMalMFZPKVDGpTBVPKiaVqeITKv9mh7UucljrIoe1LvLDhypuovJEZap4UjGpTBWTyhOVv1TxX3JY6yKHtS5yWOsiP3xIZap4Q2WqmFT+UsUTlUllqvimiknlmyomlW+qeKIyVXzisNZFDmtd5LDWRX74MpU3KiaVqeKJyicqJpUnFW+oTBWTyhOVJxVPKiaVNyomlScVT1Smim86rHWRw1oXOax1kR/+WMWkMlVMKk8qJpUnKlPFVPFEZaqYVN6omFSmiknlicpU8aTiicpU8YbKVPGbDmtd5LDWRQ5rXeSHL6v4hMpUMalMKlPFpDJVTCpTxaTyROUTKm9UTCpTxZOKSWWqeENlqniiMlV802GtixzWushhrYv88GUqTyreUJkqnqhMFZPKE5UnFU9UpopJ5Q2VqeINlaniicoTlaniEypTxScOa13ksNZFDmtd5Id/mYonKlPFGxWTylQxqUwqTyqeVHxCZap4UjGpPKl4Q+VJxV86rHWRw1oXOax1kR++rOKbVKaKN1SeVEwqn1CZKp6oTBWTyhOVqeKNik9UTCqTylTxmw5rXeSw1kUOa13E/sEHVJ5U/CaVqeKJylTxRGWqmFR+U8WkMlX8JpU3KiaVNyo+cVjrIoe1LnJY6yI/fFnFpPKk4onKVDFVTCpTxVTxRGWqeFLxRGWqeKIyqUwVk8pUMam8UfGk4onKk4pJ5ZsOa13ksNZFDmtdxP7BB1SmijdUpopvUpkqJpWp4g2VqeINlaniicpUMalMFZPKVDGpTBWTyhsVk8pU8U2HtS5yWOsih7Uu8sOHKiaVJxVTxaTyTRX/ZSpvVEwqT1Q+UTGpPKn4TYe1LnJY6yKHtS5i/+AXqXyiYlJ5o+INlScVT1SeVEwqTyo+oTJVTCpTxaTypOKJypOKbzqsdZHDWhc5rHWRHz6k8k0Vk8pU8UTlN6m8UTGpTBWTyqQyVUwqU8UbFZPKb6r4TYe1LnJY6yKHtS5i/+APqUwVk8pUMak8qZhU3qh4ojJVTCpPKiaVqeKJylTxhsqTijdUpoonKlPFNx3WushhrYsc1rrID/8yFZPKGypTxRsqU8UbFZPKGypTxROVqeITKlPFpPJE5f/psNZFDmtd5LDWRX74MpWp4g2VqeITKlPFX6r4hMpUMak8UXmjYlL5popJZar4xGGtixzWushhrYvYP/gilScVk8obFZ9QmSomlU9UPFH5TRVPVJ5UTCpTxROVT1R84rDWRQ5rXeSw1kV++JDKVDGpvFHxRGWqmFTeUHmj4g2VqeITKlPFpPJGxZOKSeWNir90WOsih7UucljrIj98qOITFU9UpopJ5UnFpPJGxaQyVUwqn1B5Q2WqeKIyqTypeFIxqfw/Hda6yGGtixzWuoj9g1+kMlVMKlPFN6lMFU9U/k0qJpUnFU9Upoo3VL6p4psOa13ksNZFDmtd5IcPqbyh8kTlScUTlTdUpopJZaqYVKaKJypvqHxCZaqYVG5yWOsih7UucljrIj98qOL/SeUNlTcqJpWp4onKVPGGyhsqU8UbFW+oTBWTyl86rHWRw1oXOax1kR8+pPKXKv6SyhOVJxVPVKaKNyomlW9SmSqeqEwVk8pvOqx1kcNaFzmsdZEfvqzim1SeVDxRmSqeqLxRMalMKk8qJpWpYlJ5UjGpTBVvVHxC5YnKVPGJw1oXOax1kcNaF/nhl6m8UfGGylQxVUwqn6h4UjGpfFPFpDJVTBVvqHyiYlKZKiaVbzqsdZHDWhc5rHWRH/7jKiaVNyomlTdUnlQ8UZkqJpU3VJ5UTBWTyhsVk8pU8ZcOa13ksNZFDmtd5IfLVEwqU8Wk8m+iMlVMKlPFX6p4UjGpTBVTxTcd1rrIYa2LHNa6iP2DD6hMFd+kMlU8UXmj4ptU3qiYVKaKSeVJxTep/KaKbzqsdZHDWhc5rHWRH75M5S+pTBVPVCaVqeKJylTxpGJSeUNlqnhDZap4ovKk4g2VJypTxScOa13ksNZFDmtdxP7BWpc4rHWRw1oXOax1kcNaFzmsdZHDWhc5rHWRw1oXOax1kcNaFzmsdZHDWhc5rHWRw1oXOax1kf8BxYXZroqYrO8AAAAASUVORK5CYII="
-    }
+    const handleCopyLink = () => {
+        navigator.clipboard.writeText(shareableLink.shareLink)
+            .then(() => {
+                handleOpenSnakeBar('Link copied to clipboard');
+            })
+            .catch(err => {
+                handleOpenSnakeBar('Failed to copy link');
+                console.error('Failed to copy link: ', err);
+            });
+    };
+
+    const handleDownloadQR = () => {
+        try {
+            // Create a link element
+            const link = document.createElement('a');
+            link.href = shareableLink.qrCode;
+            link.download = 'cause-qr-code.png';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+
+            handleOpenSnakeBar('QR code downloaded successfully');
+        } catch (error) {
+            handleOpenSnakeBar('Failed to download QR code');
+            console.error('Download error: ', error);
+        }
+    };
 
     return (
-        <div>
+        <div className="share-modal-container">
             <Modal
                 open={open}
                 onClose={handleClose}
-                aria-labelledby="modal-modal-title"
-                aria-describedby="modal-modal-description"
+                aria-labelledby="share-modal-title"
+                aria-describedby="share-modal-description"
             >
                 <Box sx={style}>
-                    <Typography id="modal-modal-title" variant="h6" component="h2">
-                        Text in a modal
-                    </Typography>
-                    <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                        Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-                    </Typography>
+                    <div className="share-modal-header">
+                        <Typography id="share-modal-title" variant="h5" component="h2">
+                            Share This Cause
+                        </Typography>
+                        <IconButton
+                            aria-label="close"
+                            onClick={handleClose}
+                            sx={{ position: 'absolute', right: 8, top: 8 }}
+                        >
+                            <CloseIcon />
+                        </IconButton>
+                    </div>
+
+                    <Divider sx={{ my: 2 }} />
+
+                    {isLoading ? (
+                        <div className="loading-container">
+                            <CircularProgress />
+                        </div>
+                    ) : (
+                        <div className="share-modal-content">
+                            <div className="qr-code-container">
+                                <Typography variant="body1" sx={{ mb: 1 }}>
+                                    Scan this QR code to access the cause:
+                                </Typography>
+                                <img
+                                    src={shareableLink.qrCode}
+                                    alt="QR Code"
+                                    className="qr-code-image"
+                                />
+                                <Button
+                                    variant="outlined"
+                                    startIcon={<DownloadIcon />}
+                                    onClick={handleDownloadQR}
+                                    sx={{ mt: 1 }}
+                                >
+                                    Download QR Code
+                                </Button>
+                            </div>
+
+                            <div className="share-link-container">
+                                <Typography variant="body1" sx={{ mb: 1, mt: 2 }}>
+                                    Or share this link directly:
+                                </Typography>
+                                <TextField
+                                    fullWidth
+                                    variant="outlined"
+                                    value={shareableLink.shareLink}
+                                    InputProps={{
+                                        readOnly: true,
+                                        endAdornment: (
+                                            <InputAdornment position="end">
+                                                <IconButton
+                                                    aria-label="copy link"
+                                                    onClick={handleCopyLink}
+                                                    edge="end"
+                                                >
+                                                    <ContentCopyIcon />
+                                                </IconButton>
+                                            </InputAdornment>
+                                        ),
+                                    }}
+                                />
+                            </div>
+
+                            <Typography variant="body2" color="text.secondary" sx={{ mt: 2 }}>
+                                Share this cause with others to help spread awareness and support.
+                            </Typography>
+                        </div>
+                    )}
+
+                    <div className="share-modal-footer">
+                        <Button
+                            variant="contained"
+                            color="primary"
+                            onClick={handleClose}
+                            fullWidth
+                            sx={{ mt: 2 }}
+                        >
+                            Close
+                        </Button>
+                    </div>
                 </Box>
             </Modal>
         </div>

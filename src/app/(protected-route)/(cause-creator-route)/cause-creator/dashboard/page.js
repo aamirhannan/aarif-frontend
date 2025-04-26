@@ -72,13 +72,13 @@ const CauseCreatorDashboard = () => {
     // ]
 
     const [causeData, setCauseData] = useState([]);
-    const [shareCauseData, setShareCauseData] = useState([]);
 
     const [isAPIInProgress, setIsAPIInProgress] = useState(true);
 
     const [openSideDrawer, setOpenSideDrawer] = useState(false);
     const [shareModalOpen, setShareModalOpen] = useState(false);
     const [shareableLink, setShareableLink] = useState(null);
+    const [sideDrawerData, setSideDrawerData] = useState({})
     const [modalLoading, setModalLoading] = useState(true);
 
 
@@ -114,7 +114,6 @@ const CauseCreatorDashboard = () => {
     }
 
     const handleShareCause = async (causeData) => {
-
         try {
             if (!userData?.userID) {
                 handleOpenSnakeBar("User ID is required");
@@ -131,7 +130,6 @@ const CauseCreatorDashboard = () => {
             const shareabaleLink = response?.data?.data
             console.log("shareabaleLink", shareabaleLink);
 
-            debugger;
             if (shareabaleLink) {
                 setShareableLink(shareabaleLink);
             }
@@ -141,6 +139,11 @@ const CauseCreatorDashboard = () => {
         } finally {
             setModalLoading(false);
         }
+    }
+
+    const handleOpenSideDrawer = (data) => {
+        setOpenSideDrawer(true);
+        setSideDrawerData(data)
     }
 
     useEffect(() => {
@@ -153,14 +156,14 @@ const CauseCreatorDashboard = () => {
             <ShareModal
                 open={shareModalOpen}
                 setOpen={setShareModalOpen}
+                isLoading={modalLoading}
                 shareableLink={shareableLink}
-                modalLoading={modalLoading}
             />
 
             <SideDrawer
                 open={openSideDrawer}
                 setOpen={setOpenSideDrawer}
-                causeData={causeData}
+                causeData={sideDrawerData}
             />
 
             <Show when={isAPIInProgress}>
@@ -177,6 +180,7 @@ const CauseCreatorDashboard = () => {
                     causeData={causeData}
                     setOpenSideDrawer={setOpenSideDrawer}
                     handleShareCause={handleShareCause}
+                    handleOpenSideDrawer={handleOpenSideDrawer}
                 />
             </Show>
 

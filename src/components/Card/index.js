@@ -13,14 +13,10 @@ import { useContext } from 'react';
 import AuthContext from "@/context/authContext";
 import SnakeBarContext from "@/context/snakeBarContext";
 
-const CustomCard = ({ causeData, setOpenSideDrawer, handleShareCause }) => {
+const CustomCard = ({ causeData, handleShareCause, handleOpenSideDrawer }) => {
 
     const { userData } = useContext(AuthContext);
     const { handleOpenSnakeBar } = useContext(SnakeBarContext);
-
-    const handleOpenSideDrawer = () => {
-        setOpenSideDrawer(true);
-    }
 
     return (
         <>
