@@ -33,7 +33,7 @@ const CustomCard = ({
                     component="img"
                     alt="green iguana"
                     height="140"
-                    image="/images/card.png"
+                    image={causeData?.imageURL || "/images/card.png"}
                 />
                 <CardContent>
                     <Typography gutterBottom variant="h5" component="div">

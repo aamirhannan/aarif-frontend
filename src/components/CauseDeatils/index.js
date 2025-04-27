@@ -123,7 +123,7 @@ const CauseDetails = ({ ROLE = ROLES.OPEN_TO_ALL, handleOpenSponsorCreateModal =
             <div className={styles.mainContent}>
                 <div className={styles.imageSection}>
                     <Image
-                        src="/images/card.png"
+                        src={causeData?.imageURL || "/images/card.png"}
                         alt={causeData.title}
                         width={600}
                         height={400}

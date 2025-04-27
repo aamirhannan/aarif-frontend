@@ -36,8 +36,10 @@ const CreateCause = () => {
         quantity: '',
         singleItemPrice: '',
         category: '',
-        impactLevel: 'Medium'
+        impactLevel: 'Medium',
+        image: null
     });
+
 
     // Error state for validation
     const [errors, setErrors] = useState({});
@@ -103,10 +105,21 @@ const CreateCause = () => {
             try {
                 setIsSubmitting(true);
 
-                const response = await axios.post('/api/cause/create-cause', {
-                    causeData: formData,
-                    token: userData?.token
-                });
+                const formDataToSend = new FormData();
+
+                formDataToSend.append('title', formData.title);
+                formDataToSend.append('description', formData.description);
+                formDataToSend.append('quantity', formData.quantity);
+                formDataToSend.append('singleItemPrice', formData.singleItemPrice);
+                formDataToSend.append('category', formData.category);
+                formDataToSend.append('impactLevel', formData.impactLevel);
+
+                formDataToSend.append('image', formData.image);
+                formDataToSend.append('token', userData?.token);
+
+                console.log("formDataToSend", formData);
+
+                const response = await axios.post('/api/cause/create-cause', formDataToSend);
 
                 const createdCause = response.data.data;
 
@@ -243,6 +256,25 @@ const CreateCause = () => {
                                 <FormControlLabel value="Medium" control={<Radio />} label="Medium" />
                                 <FormControlLabel value="High" control={<Radio />} label="High" />
                             </RadioGroup>
+                        </Grid>
+
+                        <Grid item xs={12} sx={{ width: '100%' }}>
+                            <Typography variant="subtitle1" gutterBottom>
+                                Cause Image
+                            </Typography>
+                            <input
+                                type="file"
+                                accept="image/*"
+                                onChange={(e) => {
+                                    const file = e.target.files[0];
+                                    if (file) {
+                                        setFormData({
+                                            ...formData,
+                                            image: file
+                                        });
+                                    }
+                                }}
+                            />
                         </Grid>
 
                         {/* Submit Button */}

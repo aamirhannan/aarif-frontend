@@ -114,7 +114,7 @@ const SponsoredCauseCard = ({ causeData, handleShareCause, handleOpenSideDrawer 
                 component="img"
                 alt={causeData.cause}
                 height="140"
-                image="/images/card.png"
+                image={causeData?.imageURL || "/images/card.png"}
             />
 
             <CardContent>
