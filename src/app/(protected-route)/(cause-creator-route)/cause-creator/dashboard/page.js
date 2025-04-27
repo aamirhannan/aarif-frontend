@@ -13,6 +13,7 @@ import axios from "axios";
 import AuthContext from "@/context/authContext";
 import ShareModal from "@/components/ShareModal";
 import SideDrawer from "@/components/SideDrawer";
+import { ROLES } from "@/utils/validationSchemas";
 
 const CauseCreatorDashboard = () => {
 
@@ -100,6 +101,17 @@ const CauseCreatorDashboard = () => {
 
             if (Array.isArray(causeList)) {
                 setCauseData(causeList);
+
+                // if user is redirected to this page after creating a cause, then the causeId will be in the url and we need to open the side drawer for that newly created cause
+                const urlParams = new URLSearchParams(window.location.search);
+                const causeId = urlParams.get('causeId');
+                if (causeId) {
+                    const cause = causeList.find(cause => cause.id === causeId);
+                    if (cause) {
+                        setSideDrawerData(cause);
+                        setOpenSideDrawer(true);
+                    }
+                }
             } else {
                 setCauseData([]);
                 handleOpenSnakeBar("No data found");
@@ -181,6 +193,7 @@ const CauseCreatorDashboard = () => {
                     setOpenSideDrawer={setOpenSideDrawer}
                     handleShareCause={handleShareCause}
                     handleOpenSideDrawer={handleOpenSideDrawer}
+                    ROLE={ROLES.CAUSE_CREATOR}
                 />
             </Show>
 

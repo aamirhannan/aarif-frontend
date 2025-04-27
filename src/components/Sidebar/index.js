@@ -32,7 +32,7 @@ const Sidebar = ({ sideBarItems }) => {
 
         const currentPath = getCurrentPath();
         handleDefaultActiveItem(currentPath);
-    }, []);
+    }, [router.pathname]);
 
     return (
         <div className="sidebar-container">

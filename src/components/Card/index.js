@@ -1,3 +1,4 @@
+'use client'
 import { useState } from 'react';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
@@ -12,11 +13,15 @@ import axios from 'axios';
 import { useContext } from 'react';
 import AuthContext from "@/context/authContext";
 import SnakeBarContext from "@/context/snakeBarContext";
+import { ROLES } from '@/utils/validationSchemas';
+import CustomButton from '../Button';
 
-const CustomCard = ({ causeData, handleShareCause, handleOpenSideDrawer }) => {
-
-    const { userData } = useContext(AuthContext);
-    const { handleOpenSnakeBar } = useContext(SnakeBarContext);
+const CustomCard = ({
+    causeData,
+    handleShareCause = () => { },
+    handleOpenSideDrawer = () => { },
+    ROLE = ROLES.OPEN_TO_ALL
+}) => {
 
     return (
         <>
@@ -31,17 +36,57 @@ const CustomCard = ({ causeData, handleShareCause, handleOpenSideDrawer }) => {
                     <Typography gutterBottom variant="h5" component="div">
                         {causeData.title}
                     </Typography>
-                    <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+                    <Typography
+                        variant="body2"
+                        sx={{
+                            color: 'text.secondary',
+                            display: '-webkit-box',
+                            WebkitLineClamp: 2,
+                            WebkitBoxOrient: 'vertical',
+                            overflow: 'hidden',
+                            textOverflow: 'ellipsis'
+                        }}
+                    >
                         {causeData.description}
                     </Typography>
                 </CardContent>
-                <CardActions>
-                    <Show when={causeData?.status === "APPROVED"}>
-                        <Button size="small" onClick={() => { handleShareCause(causeData) }}>Share</Button>
-                    </Show>
-                    <Button size="small" onClick={() => { handleOpenSideDrawer(causeData) }}>Learn More</Button>
-                    <Chip color={causeData?.status === "APPROVED" ? "success" : causeData?.status === "REJECTED" ? "error" : "warning"} label={causeData?.status} size="small" />
-                </CardActions>
+                <Show when={ROLE === ROLES.CAUSE_CREATOR}>
+                    <CardActions>
+                        <Show when={causeData?.status === "APPROVED"}>
+                            <Button size="small" onClick={() => { handleShareCause(causeData) }}>Share</Button>
+                        </Show>
+                        <Button size="small" onClick={() => { handleOpenSideDrawer(causeData) }}>Learn More</Button>
+                        <Chip color={causeData?.status === "APPROVED" ? "success" : causeData?.status === "REJECTED" ? "error" : "warning"} label={causeData?.status} size="small" />
+                    </CardActions>
+                </Show>
+                <Show when={ROLE === ROLES.OPEN_TO_ALL}>
+                    <CardActions sx={{ display: 'flex', justifyContent: 'space-between' }}>
+                        <CustomButton
+                            variant=""
+                            size="small"
+                            btnText="View Details"
+                            btnClick={() => { }}
+                            className="nav-button"
+                        />
+                        <CustomButton
+                            variant="outline"
+                            size="small"
+                            btnText="Claim"
+                            btnClick={() => { }}
+                            className="nav-button"
+                        />
+
+                        <CustomButton
+                            variant="primary"
+                            size="small"
+                            btnText="Sponsor"
+                            btnClick={() => { }}
+                            className="nav-button"
+                        />
+
+
+                    </CardActions>
+                </Show>
             </Card>
         </>
     );

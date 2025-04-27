@@ -1,5 +1,5 @@
 'use client'
-import { useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import {
     TextField,
     Select,
@@ -18,8 +18,17 @@ import {
 } from '@mui/material';
 import { ENUM_CATEGORY } from '@/utils/utilsFunctions';
 import styles from './CauseForm.module.scss';
+import SnakeBarContext from '@/context/snakeBarContext';
+import axios from 'axios';
+import AuthContext from '@/context/authContext';
+import { useRouter } from 'next/navigation';
 
 const CreateCause = () => {
+
+    const [isLoading, setIsLoading] = useState(true);
+    const { handleOpenSnakeBar } = useContext(SnakeBarContext);
+    const { userData } = useContext(AuthContext);
+    const router = useRouter();
     // Form state
     const [formData, setFormData] = useState({
         title: '',
@@ -86,20 +95,46 @@ const CreateCause = () => {
     };
 
     // Handle form submission
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
         if (validateForm()) {
-            setIsSubmitting(true);
 
-            // Simulate API call with 2 second delay
-            setTimeout(() => {
-                console.log('Form submitted:', formData);
+            try {
+                setIsSubmitting(true);
+
+                const response = await axios.post('/api/cause/create-cause', {
+                    causeData: formData,
+                    token: userData?.token
+                });
+
+                const createdCause = response.data.data;
+
+                if (!createdCause) {
+                    handleOpenSnakeBar("failed to create cause", "error");
+                    return;
+                }
+
+                handleOpenSnakeBar('Cause created successfully', 'success');
+                router.push(`/cause-creator/dashboard?causeId=${createdCause.id}`);
+
+            } catch (error) {
+                handleOpenSnakeBar(error.response.data.message, 'error');
+            } finally {
                 setIsSubmitting(false);
-                // You would typically send this data to an API endpoint here
-            }, 2000);
+            }
         }
     };
+
+    useEffect(() => {
+        setIsLoading(false);
+    }, []);
+
+    if (isLoading) {
+        return <div className={styles.loadingContainer}>
+            <CircularProgress />
+        </div>
+    }
 
     return (
         <div className={styles.formContainer}>

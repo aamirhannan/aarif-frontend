@@ -5,6 +5,7 @@ import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
 import Show from '../Show';
 import CustomCard from '../Card';
+import { ROLES } from '@/utils/validationSchemas';
 
 function CustomTabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -40,7 +41,8 @@ export default function BasicTabs({
     causeData = [],
     setOpenSideDrawer = () => { },
     handleShareCause = () => { },
-    handleOpenSideDrawer = () => { }
+    handleOpenSideDrawer = () => { },
+    ROLE = ROLES.OPEN_TO_ALL
 }) {
     const [value, setValue] = useState(tabNames[0]?.value || "ALL");
 
@@ -83,6 +85,7 @@ export default function BasicTabs({
                                 setOpenSideDrawer={setOpenSideDrawer}
                                 handleShareCause={handleShareCause}
                                 handleOpenSideDrawer={handleOpenSideDrawer}
+                                ROLE={ROLE}
                             />
                         ))}
                     </div>

@@ -49,11 +49,11 @@ export default function ProtectedLayout({ children }) {
                 icon: <Save style={iconStyle} />,
                 path: '/cause-creator/create-cause'
             },
-            {
-                name: 'Cause List',
-                icon: <Send style={iconStyle} />,
-                path: '/cause-creator/cause-list'
-            }
+            // {
+            //     name: 'Cause List',
+            //     icon: <Send style={iconStyle} />,
+            //     path: '/cause-creator/cause-list'
+            // }
         ],
         SPONSOR: [
             {
