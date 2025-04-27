@@ -52,13 +52,13 @@ const HeroDashboard = () => {
         <>
             <header className="hero-header">
                 <div className="hero-logo">
-                    <Image
+                    {/* <Image
                         src="/images/logo.png"
                         alt="CauseBag Logo"
                         width={150}
                         height={50}
                         priority
-                    />
+                    /> */}
                 </div>
                 {isMobile ? (
                     <>

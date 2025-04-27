@@ -36,12 +36,12 @@ export default function SignupPage() {
     const [error, setError] = useState('');
     const [success, setSuccess] = useState('');
     const [formData, setFormData] = useState({
-        name: 'Test User',
-        mobNumber: '9876543210',
-        email: 'testuser8@example.com',
-        password: 'Password123',
-        confirmPassword: 'Password123',
-        role: 'SPONSOR'
+        name: '',
+        mobNumber: '',
+        email: '',
+        password: '',
+        confirmPassword: '',
+        role: ''
     });
     const [formErrors, setFormErrors] = useState({
         name: '',

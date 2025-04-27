@@ -33,8 +33,8 @@ export default function LoginPage() {
     const { handleOpenSnakeBar, handleCloseSnakeBar } = useContext(SnakeBarContext);
     const [apiInProgress, setApiInProgress] = useState(false);
     const [formData, setFormData] = useState({
-        email: 'admin@gmail.com',
-        password: 'Password123'
+        email: '',
+        password: ''
     });
     const [formErrors, setFormErrors] = useState({
         email: '',
