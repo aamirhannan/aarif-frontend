@@ -31,7 +31,7 @@ import SnakeBarContext from '@/context/snakeBarContext';
 import { ROLES } from '@/utils/validationSchemas';
 import Show from '../Show';
 
-const CauseDetails = ({ ROLE = ROLES.OPEN_TO_ALL, handleOpenSponsorCreateModal }) => {
+const CauseDetails = ({ ROLE = ROLES.OPEN_TO_ALL, handleOpenSponsorCreateModal = () => { }, handleSponsorCause = () => { } }) => {
     const params = useParams();
     const [isLoading, setIsLoading] = useState(true);
     const { userData } = useContext(AuthContext);
@@ -235,6 +235,7 @@ const CauseDetails = ({ ROLE = ROLES.OPEN_TO_ALL, handleOpenSponsorCreateModal }
                                     size="large"
                                     className={styles.actionButton}
                                     startIcon={<AttachMoney />}
+                                    onClick={() => handleSponsorCause(causeData)}
                                 >
                                     Sponsor
                                 </Button>
