@@ -91,7 +91,7 @@ export default function SideDrawer({ open, setOpen, causeData }) {
                         <TextField
                             fullWidth
                             label="Quantity"
-                            value={causeData.qty}
+                            value={causeData.quantity}
                             disabled
                             variant="outlined"
                             margin="normal"

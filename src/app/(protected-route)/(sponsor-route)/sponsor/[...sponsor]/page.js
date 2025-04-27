@@ -99,9 +99,12 @@ const Sponsor = () => {
         const createSponsor = searchParams.get('createSponsor');
         if (createSponsor) {
             setOpen(true);
-            setCreateSponsor({
+        }
+        if (currentPath) {
+            setCreateSponsor(prev => ({
+                ...prev,
                 causeID: currentPath,
-            });
+            }));
         }
 
     }, []);

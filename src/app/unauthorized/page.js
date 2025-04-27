@@ -12,12 +12,12 @@ const Unauthorized = () => {
         router.push("/login");
     }
     return (
-        <div>
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100vh', width: '100vw' }}>
             <h1>You are not authorized to access this page</h1>
             <CustomButton
                 variant="outline"
                 size="medium"
-                btnText="Logout"
+                btnText="Sign In with different account"
                 btnClick={handleLogOutBtnClick}
                 className="nav-button"
             />

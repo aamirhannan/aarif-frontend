@@ -197,11 +197,11 @@ const CauseCreatorDashboard = () => {
                 />
             </Show>
 
-            <Show when={!isAPIInProgress && causeData?.length === 0}>
+            {/* <Show when={!isAPIInProgress && causeData?.length === 0}>
                 <div className="no-data-container">
                     <p>No data found</p>
                 </div>
-            </Show>
+            </Show> */}
         </div>
     );
 };
