@@ -1,28 +1,95 @@
 'use client'
 import CauseDetails from "@/components/CauseDeatils";
 import { ROLES } from "@/utils/validationSchemas";
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
 import Show from "@/components/Show";
 import { Box, Modal, Typography, Stack, TextField, Button } from "@mui/material";
+import axios from "axios";
+import AuthContext from "@/context/authContext";
+import SnakeBarContext from "@/context/snakeBarContext";
+import { useRouter } from "next/navigation";
+
+
+// Initial state
+const initialSponsorState = {
+    bagCount: "",
+    branding: "",
+    message: "",
+    causeID: "",
+};
 
 const Sponsor = () => {
-
+    const { userData } = useContext(AuthContext);
+    const { handleOpenSnakeBar } = useContext(SnakeBarContext);
+    const router = useRouter();
     const params = useParams();
     const [open, setOpen] = useState(false);
     const [createSponsor, setCreateSponsor] = useState({
-        bagCount: 0,
+        bagCount: "",
         branding: "",
         message: "",
         causeID: "",
     });
 
-
-
-
     const handleOpenSponsorCreateModal = () => {
         console.log("create modal");
         setOpen(true);
+    }
+
+
+    // Validate function
+    const isFormValid = () => {
+        return (
+            Number(createSponsor?.bagCount) > 0 &&
+            createSponsor?.branding?.trim() !== '' &&
+            createSponsor?.message?.trim() !== ''
+        );
+    };
+
+    // Handle input change
+    const handleChange = (e) => {
+        setCreateSponsor(prev => ({
+            ...prev,
+            [e.target.name]: e.target.value
+        }));
+    };
+
+    // Handle form submit
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        if (isFormValid()) {
+            console.log("Form submitted:", createSponsor);
+            handleCreateSponsorship();
+        }
+    };
+
+    const handleCreateSponsorship = async () => {
+
+        try {
+            const { bagCount, branding, message, causeID } = createSponsor;
+            const payload = {
+                bagCount: parseInt(bagCount),
+                branding,
+                message,
+                causeID,
+                token: userData?.token
+            };
+
+            const response = await axios.post(`/api/sponsor/sponser-cause`, payload);
+            const isCreated = response?.data?.data;
+            if (!isCreated) {
+                handleOpenSnakeBar("Sponsorship creation failed", "error");
+            } else {
+                router.push(`/sponsor/sponsered`);
+                handleOpenSnakeBar("Sponsorship created successfully", "success");
+            }
+        } catch (error) {
+            console.log(error);
+            handleOpenSnakeBar("Sponsorship creation failed", "error");
+        } finally {
+        }
+
     }
 
 
@@ -65,24 +132,18 @@ const Sponsor = () => {
                         <Typography variant="h5" component="h2" gutterBottom>
                             Create Sponsorship
                         </Typography>
-                        <form onSubmit={(e) => {
-                            e.preventDefault();
-                            // Handle form submission here
-                            console.log("Form submitted:", createSponsor);
-                            // Add API call to create sponsorship
-                        }}>
+
+                        <form onSubmit={handleSubmit}>
                             <Stack spacing={3}>
                                 <TextField
                                     fullWidth
                                     label="Bag Count"
                                     type="number"
                                     value={createSponsor.bagCount}
-                                    onChange={(e) => setCreateSponsor({
-                                        ...createSponsor,
-                                        bagCount: parseInt(e.target.value) || 0
-                                    })}
-                                    error={createSponsor.bagCount <= 0}
-                                    helperText={createSponsor.bagCount <= 0 ? "Bag count must be greater than 0" : ""}
+                                    name="bagCount"
+                                    onChange={handleChange}
+                                    error={typeof createSponsor.bagCount === 'number' && createSponsor.bagCount <= 0}
+                                    helperText={typeof createSponsor.bagCount === 'number' && createSponsor.bagCount <= 0 ? "Bag count must be greater than 0" : ""}
                                     required
                                 />
 
@@ -90,12 +151,10 @@ const Sponsor = () => {
                                     fullWidth
                                     label="Branding"
                                     value={createSponsor.branding}
-                                    onChange={(e) => setCreateSponsor({
-                                        ...createSponsor,
-                                        branding: e.target.value
-                                    })}
-                                    error={!createSponsor?.branding?.trim()}
-                                    helperText={!createSponsor?.branding?.trim() ? "Branding is required" : ""}
+                                    name="branding"
+                                    onChange={handleChange}
+                                    error={typeof createSponsor.branding === 'string' && !createSponsor.branding.trim()}
+                                    helperText={typeof createSponsor.branding === 'string' && !createSponsor.branding.trim() ? "Branding is required" : ""}
                                     required
                                 />
 
@@ -105,12 +164,10 @@ const Sponsor = () => {
                                     multiline
                                     rows={4}
                                     value={createSponsor.message}
-                                    onChange={(e) => setCreateSponsor({
-                                        ...createSponsor,
-                                        message: e.target.value
-                                    })}
-                                    error={!createSponsor?.message?.trim()}
-                                    helperText={!createSponsor?.message?.trim() ? "Message is required" : ""}
+                                    onChange={handleChange}
+                                    name="message"
+                                    error={typeof createSponsor.message === 'string' && !createSponsor.message.trim()}
+                                    helperText={typeof createSponsor.message === 'string' && !createSponsor.message.trim() ? "Message is required" : ""}
                                     required
                                 />
 
@@ -124,11 +181,7 @@ const Sponsor = () => {
                                     <Button
                                         variant="contained"
                                         type="submit"
-                                        disabled={
-                                            createSponsor?.bagCount <= 0 ||
-                                            !createSponsor?.branding?.trim() ||
-                                            !createSponsor?.message?.trim()
-                                        }
+                                        disabled={!isFormValid()}
                                     >
                                         Create Sponsorship
                                     </Button>

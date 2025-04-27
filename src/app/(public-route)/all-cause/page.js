@@ -103,6 +103,7 @@ const AllCause = () => {
 
     const handleSponsorCause = (causeData) => {
         console.log(causeData);
+        router.push(`/sponsor/${causeData.causeID}?createSponsor=true`);
     }
 
     const handleGetAllCause = async () => {
