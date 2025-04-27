@@ -70,7 +70,24 @@ export default function BasicTabs({
     return (
         <Box sx={{ width: '100%' }}>
             <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-                <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
+                <Tabs
+                    value={value}
+                    onChange={handleChange}
+                    aria-label="basic tabs example"
+                    variant="scrollable"
+                    scrollButtons="auto"
+                    allowScrollButtonsMobile
+                    sx={{
+                        '& .MuiTabs-scrollButtons.Mui-disabled': {
+                            opacity: 0.3,
+                        },
+                        '& .MuiTab-root': {
+                            minWidth: { xs: '80px', sm: '120px' },
+                            fontSize: { xs: '0.75rem', sm: '0.875rem' },
+                            padding: { xs: '6px 8px', sm: '12px 16px' },
+                        }
+                    }}
+                >
                     {tabNames.map((tabName, index) => (
                         <Tab key={`tab-${index}`} label={tabName.label} value={tabName.value} {...a11yProps(index)} />
                     ))}
@@ -83,18 +100,24 @@ export default function BasicTabs({
                         gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
                         gap: '20px'
                     }}>
-                        {filterCauseData(tabName.value, filterBy).map((cause, idx) => (
-                            <CustomCard key={cause.causeID || idx}
-                                causeData={cause}
-                                setOpenSideDrawer={setOpenSideDrawer}
-                                handleShareCause={handleShareCause}
-                                handleOpenSideDrawer={handleOpenSideDrawer}
-                                ROLE={ROLE}
-                                handleViewCause={handleViewCause}
-                                handleClaimCause={handleClaimCause}
-                                handleSponsorCause={handleSponsorCause}
-                            />
-                        ))}
+                        {filterCauseData(tabName.value, filterBy).length > 0 ? (
+                            filterCauseData(tabName.value, filterBy).map((cause, idx) => (
+                                <CustomCard key={cause.causeID || idx}
+                                    causeData={cause}
+                                    setOpenSideDrawer={setOpenSideDrawer}
+                                    handleShareCause={handleShareCause}
+                                    handleOpenSideDrawer={handleOpenSideDrawer}
+                                    ROLE={ROLE}
+                                    handleViewCause={handleViewCause}
+                                    handleClaimCause={handleClaimCause}
+                                    handleSponsorCause={handleSponsorCause}
+                                />
+                            ))
+                        ) : (
+                            <div style={{ gridColumn: '1 / -1', textAlign: 'center', padding: '20px' }}>
+                                <p>No data for this category</p>
+                            </div>
+                        )}
                     </div>
                 </CustomTabPanel>
             ))}

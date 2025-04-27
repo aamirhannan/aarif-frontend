@@ -5,21 +5,21 @@ import { BACKEND_URL } from "../../../../../urls";
 import ERROR_MESSAGE from "@/utils/errorMessages";
 export async function POST(request) {
     try {
-        const { causeID } = await request.json();
+        const { } = await request.json();
         // Validate inputs
-        if (!causeID) {
-            return NextResponse.json(
-                { message: "Cause ID is required" },
-                { status: 400 }
-            );
-        }
+        // if (!token) {
+        //     return NextResponse.json(
+        //         { message: "Token is required" },
+        //         { status: 400 }
+        //     );
+        // }
 
         // const headers = {
         //     "Authorization": `Bearer ${token}`
         // }
 
         // Forward the request to the backend
-        const response = await axios.get(`${BACKEND_URL}/api/v1/cause/share/${causeID}`);
+        const response = await axios.get(`${BACKEND_URL}/api/v1/sponsor/causes`);
 
 
         // Return the response from the backend

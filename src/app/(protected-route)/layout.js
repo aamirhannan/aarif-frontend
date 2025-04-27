@@ -40,7 +40,7 @@ export default function ProtectedLayout({ children }) {
         ],
         CAUSE_CREATOR: [
             {
-                name: 'Dashboard',
+                name: 'All Causes',
                 icon: <LayoutDashboard style={iconStyle} />,
                 path: '/cause-creator/dashboard'
             },
@@ -57,28 +57,38 @@ export default function ProtectedLayout({ children }) {
         ],
         SPONSOR: [
             {
-                name: 'Dashboard',
+                name: 'All Causes',
                 icon: <LayoutDashboard style={iconStyle} />,
                 path: '/sponsor/dashboard'
             },
             {
-                name: 'Cause List',
+                name: 'Sponsered',
                 icon: <Mail style={iconStyle} />,
-                path: '/sponsor/cause-list'
+                path: '/sponsor/sponsered'
             },
-            {
-                name: 'Cause List',
-                icon: <Send style={iconStyle} />,
-                path: '/sponsor/cause-list'
-            }
+            // {
+            //     name: 'Cause List',
+            //     icon: <Send style={iconStyle} />,
+            //     path: '/sponsor/progress'
+            // }
         ]
     }
 
 
     useEffect(() => {
+
         if (!userData) {
             router.push("/login");
         }
+
+        router.prefetch("/login");
+        router.prefetch("/signup");
+        router.prefetch("/sponsor/dashboard");
+        router.prefetch("/sponsor/cause-list");
+        router.prefetch("/cause-creator/dashboard");
+        router.prefetch("/cause-creator/create-cause");
+
+
         setSideBarItems(SIDEBAR_ITEMS[userData?.role]);
         setCurrentRole(userData?.role);
         setTimeout(() => {

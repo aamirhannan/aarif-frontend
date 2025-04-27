@@ -86,8 +86,25 @@ const CustomCard = ({
                             btnClick={() => { handleSponsorCause(causeData) }}
                             className="nav-button"
                         />
+                    </CardActions>
+                </Show>
+                <Show when={ROLE === ROLES.SPONSOR}>
+                    <CardActions sx={{ display: 'flex', justifyContent: 'space-between' }}>
+                        <CustomButton
+                            variant=""
+                            size="small"
+                            btnText="View Details"
+                            btnClick={() => { handleViewCause(causeData) }}
+                            className="nav-button"
+                        />
 
-
+                        <CustomButton
+                            variant="primary"
+                            size="small"
+                            btnText="Sponsor"
+                            btnClick={() => { handleSponsorCause(causeData) }}
+                            className="nav-button"
+                        />
                     </CardActions>
                 </Show>
             </Card>

@@ -23,7 +23,6 @@ const AuthProvider = ({ children }) => {
     const handleLogout = () => {
         localStorage.removeItem('userData');
         setUserData(null);
-        router.push("/");
     }
 
     return (

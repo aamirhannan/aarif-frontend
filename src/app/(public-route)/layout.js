@@ -3,6 +3,7 @@ import { useEffect, useContext, useState } from "react";
 import { useRouter } from "next/navigation";
 import AuthContext from "@/context/authContext";
 import PageLoader from "@/components/PageLoader";
+import Header from "@/components/Header";
 
 export default function PublicLayout({ children }) {
     const router = useRouter();
@@ -19,8 +20,9 @@ export default function PublicLayout({ children }) {
     }
 
     return (
-        <div>
+        <>
+            <Header />
             {children}
-        </div>
+        </>
     );
 }

@@ -14,7 +14,7 @@ const urlMapping = {
 }
 const Header = ({ currentRole }) => {
     const router = useRouter();
-    const { setUserData } = useContext(AuthContext);
+    const { userData, setUserData } = useContext(AuthContext);
     const [pageTitle, setPageTitle] = useState(null);
 
     const handleLogout = () => {

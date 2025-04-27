@@ -92,7 +92,7 @@ export default function ShareModal({ open, setOpen, isLoading, shareableLink }) 
                                     Scan this QR code to access the cause:
                                 </Typography>
                                 <img
-                                    src={shareableLink.qrCode}
+                                    src={shareableLink?.qrCode}
                                     alt="QR Code"
                                     className="qr-code-image"
                                 />
@@ -113,7 +113,7 @@ export default function ShareModal({ open, setOpen, isLoading, shareableLink }) 
                                 <TextField
                                     fullWidth
                                     variant="outlined"
-                                    value={shareableLink.shareLink}
+                                    value={shareableLink?.shareLink}
                                     InputProps={{
                                         readOnly: true,
                                         endAdornment: (
