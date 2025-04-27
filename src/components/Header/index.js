@@ -3,7 +3,7 @@ import "./header.scss";
 import { useRouter } from "next/navigation";
 import { useContext, useState, useEffect } from "react";
 import AuthContext from "@/context/authContext";
-import getCurrentPath from "@/utils/utilsFunctions";
+import getCurrentPath, { ENUM_ROLE } from "@/utils/utilsFunctions";
 import AccountMenu from "./ProfileSection";
 const urlMapping = {
     '/dashboard': 'Dashboard',
@@ -12,9 +12,9 @@ const urlMapping = {
     '/saved-mails': 'Saved Mails',
     '/upload-mails': 'Upload Mails',
 }
-const Header = () => {
+const Header = ({ currentRole }) => {
     const router = useRouter();
-    const { setUserData } = useContext(AuthContext);
+    const { userData, setUserData } = useContext(AuthContext);
     const [pageTitle, setPageTitle] = useState(null);
 
     const handleLogout = () => {
@@ -32,7 +32,7 @@ const Header = () => {
         <div className="header-container">
             <div className="header-left">
                 <div className="header-left-logo">
-                    <h1>{pageTitle ? pageTitle : 'Linkedin Mailer'}</h1>
+                    <h1>{currentRole ? `Logged in as:  ${ENUM_ROLE[currentRole]}` : ''}</h1>
                 </div>
             </div>
 

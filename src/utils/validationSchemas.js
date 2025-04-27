@@ -5,7 +5,8 @@ export const ROLES = {
     ADMIN: 'ADMIN',
     CAUSE_CREATOR: 'CAUSE_CREATOR',
     SPONSOR: 'SPONSOR',
-    PUBLIC: 'PUBLIC'
+    PUBLIC: 'PUBLIC',
+    OPEN_TO_ALL: 'OPEN_TO_ALL'
 };
 
 // Signup form validation schema

@@ -184,12 +184,12 @@ export default function LoginPage() {
                     />
 
                     <Grid container justifyContent="space-between" mt={2}>
-                        <Grid item xs>
+                        <Grid>
                             <Link href="#" variant="body2">
                                 Forgot password?
                             </Link>
                         </Grid>
-                        <Grid item>
+                        <Grid>
                             <Link href="/signup" variant="body2">
                                 {"Don't have an account? Sign Up"}
                             </Link>

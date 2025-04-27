@@ -2,10 +2,13 @@
 
 import { useRouter } from "next/navigation";
 import CustomButton from "@/components/Button";
+import { useContext } from "react";
+import AuthContext from "@/context/authContext";
 const Unauthorized = () => {
     const router = useRouter();
-    const handleLogout = () => {
-        localStorage.removeItem("userData");
+    const { handleLogout } = useContext(AuthContext);
+    const handleLogOutBtnClick = () => {
+        handleLogout();
         router.push("/login");
     }
     return (
@@ -15,7 +18,7 @@ const Unauthorized = () => {
                 variant="outline"
                 size="medium"
                 btnText="Logout"
-                btnClick={handleLogout}
+                btnClick={handleLogOutBtnClick}
                 className="nav-button"
             />
         </div>
