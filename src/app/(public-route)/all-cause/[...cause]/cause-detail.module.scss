@@ -1,0 +1,139 @@
+.causeDetailContainer {
+    margin: 2rem;
+    padding: 2rem;
+
+    .causeHeader {
+        margin-bottom: 2rem;
+
+        .causeTitle {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #1976d2;
+        }
+
+        .causeMeta {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+
+            .metaItem {
+                background-color: #f5f5f5;
+                padding: 0.5rem 1rem;
+                border-radius: 20px;
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+
+                .metaIcon {
+                    color: #1976d2;
+                }
+            }
+        }
+    }
+
+    .mainContent {
+        display: flex;
+        gap: 2rem;
+        margin-bottom: 2rem;
+        flex-wrap: wrap;
+
+        @media (max-width: 900px) {
+            flex-direction: column;
+        }
+
+        .imageSection {
+            flex: 1;
+            min-width: 300px;
+
+            .causeImage {
+                width: 100%;
+                border-radius: 8px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            }
+        }
+
+        .detailsSection {
+            flex: 2;
+
+            .sectionTitle {
+                font-size: 1.5rem;
+                font-weight: 600;
+                margin-bottom: 1rem;
+                color: #333;
+            }
+
+            .description {
+                margin-bottom: 2rem;
+                line-height: 1.6;
+                color: #555;
+            }
+
+            .statsGrid {
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+                gap: 1.5rem;
+                margin-bottom: 2rem;
+
+                .statCard {
+                    background-color: white;
+                    padding: 1.5rem;
+                    border-radius: 8px;
+                    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+
+                    .statValue {
+                        font-size: 1.8rem;
+                        font-weight: 700;
+                        color: #1976d2;
+                        margin-bottom: 0.5rem;
+                    }
+
+                    .statLabel {
+                        font-size: 0.9rem;
+                        color: #666;
+                        text-align: center;
+                    }
+                }
+            }
+        }
+    }
+
+    .actionSection {
+        margin-top: 2rem;
+
+        .actionButtons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+
+            .actionButton {
+                min-width: 150px;
+            }
+        }
+    }
+
+    .progressSection {
+        margin: 2rem 0;
+
+        .progressBar {
+            height: 10px;
+            border-radius: 5px;
+        }
+
+        .progressStats {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 0.5rem;
+
+            .progressText {
+                font-size: 0.9rem;
+                color: #666;
+            }
+        }
+    }
+}

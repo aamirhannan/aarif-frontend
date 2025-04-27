@@ -20,7 +20,10 @@ const CustomCard = ({
     causeData,
     handleShareCause = () => { },
     handleOpenSideDrawer = () => { },
-    ROLE = ROLES.OPEN_TO_ALL
+    ROLE = ROLES.OPEN_TO_ALL,
+    handleViewCause = () => { },
+    handleClaimCause = () => { },
+    handleSponsorCause = () => { },
 }) => {
 
     return (
@@ -65,14 +68,14 @@ const CustomCard = ({
                             variant=""
                             size="small"
                             btnText="View Details"
-                            btnClick={() => { }}
+                            btnClick={() => { handleViewCause(causeData) }}
                             className="nav-button"
                         />
                         <CustomButton
                             variant="outline"
                             size="small"
                             btnText="Claim"
-                            btnClick={() => { }}
+                            btnClick={() => { handleClaimCause(causeData) }}
                             className="nav-button"
                         />
 
@@ -80,7 +83,7 @@ const CustomCard = ({
                             variant="primary"
                             size="small"
                             btnText="Sponsor"
-                            btnClick={() => { }}
+                            btnClick={() => { handleSponsorCause(causeData) }}
                             className="nav-button"
                         />
 

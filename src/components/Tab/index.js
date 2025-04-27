@@ -42,7 +42,11 @@ export default function BasicTabs({
     setOpenSideDrawer = () => { },
     handleShareCause = () => { },
     handleOpenSideDrawer = () => { },
-    ROLE = ROLES.OPEN_TO_ALL
+    ROLE = ROLES.OPEN_TO_ALL,
+    handleViewCause = () => { },
+    handleClaimCause = () => { },
+    handleSponsorCause = () => { },
+    filterBy = "status"
 }) {
     const [value, setValue] = useState(tabNames[0]?.value || "ALL");
 
@@ -51,14 +55,14 @@ export default function BasicTabs({
         setValue(newValue);
     };
 
-    const filterCauseData = (status) => {
+    const filterCauseData = (status, filterBy = "status") => {
         if (status === "ALL") {
             return causeData;
         }
 
-        return causeData.filter((cause) => {
+        return causeData?.filter((cause) => {
             // Convert both sides to the same case for comparison
-            const causeStatus = cause.status.toUpperCase();
+            const causeStatus = cause[filterBy]?.toUpperCase();
             return causeStatus === status;
         });
     };
@@ -79,13 +83,16 @@ export default function BasicTabs({
                         gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
                         gap: '20px'
                     }}>
-                        {filterCauseData(tabName.value).map((cause, idx) => (
+                        {filterCauseData(tabName.value, filterBy).map((cause, idx) => (
                             <CustomCard key={cause.causeID || idx}
                                 causeData={cause}
                                 setOpenSideDrawer={setOpenSideDrawer}
                                 handleShareCause={handleShareCause}
                                 handleOpenSideDrawer={handleOpenSideDrawer}
                                 ROLE={ROLE}
+                                handleViewCause={handleViewCause}
+                                handleClaimCause={handleClaimCause}
+                                handleSponsorCause={handleSponsorCause}
                             />
                         ))}
                     </div>
