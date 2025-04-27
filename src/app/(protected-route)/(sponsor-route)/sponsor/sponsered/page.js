@@ -84,14 +84,18 @@ const Sponsered = () => {
             <ShareModal open={open} setOpen={setOpen} isLoading={modalLoading} shareableLink={shareableLink} />
             <div className={styles.sponsoredCauseList}>
                 {
-                    sponsorshipData.map((sponsorship) => (
-                        <SponsoredCauseCard
-                            causeData={sponsorship}
-                            handleShareCause={handleShareCause}
-                            handleOpenSideDrawer={() => { }}
-                            key={sponsorship.sponsorshipID}
-                        />
-                    ))
+                    sponsorshipData.length > 0 ?
+                        sponsorshipData.map((sponsorship) => (
+                            <SponsoredCauseCard
+                                causeData={sponsorship}
+                                handleShareCause={handleShareCause}
+                                handleOpenSideDrawer={() => { }}
+                                key={sponsorship.sponsorshipID}
+                            />
+                        )) :
+                        <div className={styles.noData}>
+                            <Typography variant="h6">No Sponsored Cause Found</Typography>
+                        </div>
                 }
             </div>
         </>
