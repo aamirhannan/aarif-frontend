@@ -5,9 +5,9 @@ import { BACKEND_URL } from "../../../../../urls";
 import ERROR_MESSAGE from "@/utils/errorMessages";
 export async function POST(request) {
     try {
-        const { mobileNumber, otp, causeID } = await request.json();
+        const { mobileNumber, otp, causeId } = await request.json();
         // Validate inputs
-        if (!mobileNumber || !otp || !causeID) {
+        if (!mobileNumber || !otp || !causeId) {
             return NextResponse.json(
                 { message: "All fields are required" },
                 { status: 400 }
@@ -28,7 +28,7 @@ export async function POST(request) {
         const payload = {
             mobileNumber,
             otp,
-            causeID
+            causeId
         }
 
         // Forward the request to the backend

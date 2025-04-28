@@ -88,6 +88,7 @@ const AllCause = () => {
     // ]
 
     const [causeData, setCauseData] = useState([]);
+    const [causeDataToClaim, setCauseDataToClaim] = useState(null);
     const [loading, setLoading] = useState(false);
     const { handleOpenSnakeBar } = useContext(SnakeBarContext);
     const [claimModalOpen, setClaimModalOpen] = useState(false);
@@ -100,7 +101,9 @@ const AllCause = () => {
     }
 
     const handleClaimCause = (causeData) => {
+        console.log("causeData", causeData);
         setClaimModalOpen(true);
+        setCauseDataToClaim(causeData);
     }
 
     const handleSponsorCause = (causeData) => {
@@ -141,7 +144,7 @@ const AllCause = () => {
 
     return (
         <div className={styles.allCauseContainer}>
-            <ClaimModal open={claimModalOpen} onClose={() => setClaimModalOpen(false)} />
+            <ClaimModal open={claimModalOpen} onClose={() => setClaimModalOpen(false)} causeData={causeDataToClaim} />
             <Typography variant="h6" className={styles.allCauseTitle}>All Cause</Typography>
             <Grid container spacing={4}>
 

@@ -7,7 +7,7 @@ import axios from "axios";
 import SnakeBarContext from "@/context/snakeBarContext";
 import { useContext } from "react";
 
-const ClaimModal = ({ open, onClose }) => {
+const ClaimModal = ({ open, onClose, causeData }) => {
 
     const { handleOpenSnakeBar } = useContext(SnakeBarContext);
 
@@ -21,7 +21,7 @@ const ClaimModal = ({ open, onClose }) => {
     const [step, setStep] = useState(1);
 
     // Loading state when calling API
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
 
     // To store any error messages
     const [error, setError] = useState("");
@@ -45,7 +45,7 @@ const ClaimModal = ({ open, onClose }) => {
             const response = await axios.post(`/api/verify/verify-otp`, {
                 mobileNumber: mobileNumber,
                 otp: enteredOtp,
-                causeID: causeID
+                causeId: causeData.causeID
             });
             handleOpenSnakeBar("OTP verified successfully");
         } catch (error) {
@@ -74,8 +74,8 @@ const ClaimModal = ({ open, onClose }) => {
     // Function called when "Verify OTP" button is clicked
     const handleVerifyOtp = async () => {
         setError("");
-        if (otp.length !== 6) {
-            setError("Please enter a 6-digit OTP.");
+        if (otp.length !== 4) {
+            setError("Please enter a 4-digit OTP.");
             return;
         }
         try {
