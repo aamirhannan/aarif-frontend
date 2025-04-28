@@ -1,0 +1,39 @@
+.modalContainer {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    background: white;
+    border-radius: 10px;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    outline: none;
+}
+
+.heading {
+    text-align: center;
+    font-weight: 600;
+}
+
+.inputField {
+    margin-top: 10px;
+}
+
+.actionButton {
+    margin-top: 20px;
+}
+
+.errorText {
+    color: red;
+    font-size: 14px;
+    text-align: center;
+}
+
+.successMessage {
+    text-align: center;
+    color: green;
+    font-weight: bold;
+}

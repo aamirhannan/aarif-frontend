@@ -228,7 +228,7 @@ export default function SignupPage() {
                             label="Select Role"
                             onChange={handleChange}
                         >
-                            <MenuItem value={ROLES.CAUSE_POSTER}>Cause Poster</MenuItem>
+                            <MenuItem value={ROLES.CAUSE_CREATOR}>Cause Creator</MenuItem>
                             <MenuItem value={ROLES.SPONSOR}>Sponsor</MenuItem>
                             <MenuItem value={ROLES.PUBLIC}>Public</MenuItem>
                         </Select>

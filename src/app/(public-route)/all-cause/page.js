@@ -10,6 +10,7 @@ import axios from "axios";
 import { useEffect, useState, useContext } from "react";
 import SnakeBarContext from "@/context/snakeBarContext";
 import AuthContext from "@/context/authContext";
+import ClaimModal from "@/components/ClaimModal";
 
 const AllCause = () => {
     const router = useRouter();
@@ -89,6 +90,7 @@ const AllCause = () => {
     const [causeData, setCauseData] = useState([]);
     const [loading, setLoading] = useState(false);
     const { handleOpenSnakeBar } = useContext(SnakeBarContext);
+    const [claimModalOpen, setClaimModalOpen] = useState(false);
 
 
     const tabNames = [{ label: "All", value: "ALL" }, ...ENUM_CATEGORY]
@@ -98,7 +100,7 @@ const AllCause = () => {
     }
 
     const handleClaimCause = (causeData) => {
-        console.log(causeData);
+        setClaimModalOpen(true);
     }
 
     const handleSponsorCause = (causeData) => {
@@ -139,6 +141,7 @@ const AllCause = () => {
 
     return (
         <div className={styles.allCauseContainer}>
+            <ClaimModal open={claimModalOpen} onClose={() => setClaimModalOpen(false)} />
             <Typography variant="h6" className={styles.allCauseTitle}>All Cause</Typography>
             <Grid container spacing={4}>
 
